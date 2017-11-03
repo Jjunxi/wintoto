@@ -1,8 +1,11 @@
 import random as rm
 import operator
 import json
-from matplotlib import pyplot as plt
 import numpy as np
+
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
 
 PICK_NUMBER = 6
 ROUND_NUMBER = 314
@@ -11,8 +14,7 @@ CHECK_NUMBER = 300
 
 
 all_lucks = []
-p = {}
-pick_rounds = []
+sorted_p = {}
 
 
 def get_all():
@@ -29,6 +31,7 @@ def get_all():
 
 def count_frequence():
 	# print(all_lucks)
+	p = {}
 	for number in range(UPPER_LIMIT):
 		time = 0
 		for round in all_lucks:
@@ -36,12 +39,11 @@ def count_frequence():
 				if luck == number+1:
 					time += 1
 		p[number+1] = time
-	# print(p)
-
-def pick_lucks():
+	global sorted_p
 	sorted_p = sorted(p.items(), key=operator.itemgetter(1))
 	sorted_p.reverse()
-	print(sorted_p)
+
+def pick_lucks():
 	# print(sorted_p[:2])
 	# print(sorted_p[-2:])
 	first_round = [pair[0] for pair in sorted_p[:PICK_NUMBER]]
@@ -73,10 +75,34 @@ def check_result(picks):
 			print(win)
 			print('luck round:\n{}'.format(round))
 
+def draw_bars():
+	last_draw = all_lucks[0]
+
+	x_last = []
+	y_last = []
+	x_most = []
+	y_most = []
+	x = []
+	y = []
+
+	for idx, ele in enumerate(sorted_p):
+		if ele[0] in last_draw:
+			x_last.append(ele[0])
+			y_last.append(ele[1])
+		elif idx < 6:
+			x_most.append(ele[0])
+			y_most.append(ele[1])
+		# elif idx > 42:
+		else:
+			x.append(ele[0])
+			y.append(ele[1])
+
+	plt.bar(x_last, y_last, 0.5, color='r', label='Last Draw')
+	plt.bar(x_most, y_most, 0.5, color='b', label='Most Draw')
+	plt.bar(x, y, 0.5, color='lightskyblue')
+	plt.legend(loc='upper right')
+
 def show():
-	sorted_p = sorted(p.items(), key=operator.itemgetter(1))
-	sorted_p.reverse()
-	# print(sorted_p)
 	x = [ele[0] for ele in sorted_p]
 	y = [ele[1] for ele in sorted_p]
 	plt.xlim((0, 50))
@@ -84,12 +110,15 @@ def show():
 	plt.xlabel('lucky numbers')
 	plt.ylabel('frequence')
 	plt.xticks(np.arange(1, 50, 1))
-	colors = ['r' for i in range(6)] + ['#75bbfd' for i in range(43)]
-	plt.bar(x, y, color=colors)
+
+	draw_bars()
+	
 	for m,n in zip(x,y):
 		plt.text(m, n+0.05, '%d' % n, ha='center', va= 'bottom')
 
-	plt.show()
+	# plt.show()
+	plt.savefig('../wintoto/web/web-client/src/assets/img/overall.png',bbox_inches='tight')
+
 
 if __name__ == '__main__':
 	get_all()

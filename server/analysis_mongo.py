@@ -1,11 +1,14 @@
 import random as rm
 import operator
-# import json
-from matplotlib import pyplot as plt
+
 import numpy as np
 import pymongo
 from config import *
 from bson.json_util import dumps, RELAXED_JSON_OPTIONS
+
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
 
 all_lucks = []
 sorted_p = {}
@@ -21,10 +24,10 @@ def get_all():
 	# 	round.sort()
 	# 	all_lucks.append(round)
 	data_table = list(table.find().sort("number", pymongo.DESCENDING))
-	with open('lucks.txt', 'w') as outfile:
-			content = dumps(data_table[:5], json_options=RELAXED_JSON_OPTIONS)
-			outfile.write(content)
-			outfile.close()
+	# with open('lucks.txt', 'w') as outfile:
+	# 		content = dumps(data_table[:5], json_options=RELAXED_JSON_OPTIONS)
+	# 		outfile.write(content)
+	# 		outfile.close()
 
 	for data in data_table:
 		lucks = data['lucks']
@@ -144,7 +147,9 @@ def show():
 	for m,n in zip(x,y):
 		plt.text(m, n+0.05, '%d' % n, ha='center', va= 'bottom')
 
-	plt.show()
+	# plt.show()
+	plt.savefig('../wintoto/web/web-client/src/assets/img/overall.png',bbox_inches='tight')
+
 
 if __name__ == '__main__':
 	get_all()
