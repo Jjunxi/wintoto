@@ -117,7 +117,7 @@ def show():
 		plt.text(m, n+0.05, '%d' % n, ha='center', va= 'bottom')
 
 	# plt.show()
-	plt.savefig('../wintoto/web/web-client/src/assets/img/overall.png',bbox_inches='tight')
+	plt.savefig('../web/web-client/src/assets/img/overall.png',bbox_inches='tight')
 
 
 if __name__ == '__main__':
