@@ -4,7 +4,7 @@ import json
 import numpy as np
 
 import matplotlib
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 
 PICK_NUMBER = 6
@@ -55,6 +55,18 @@ def pick_lucks():
 	last_round.sort()
 	random_better_round.sort()
 	print('first round:\n{}'.format(first_round))
+
+	with open('first_round.txt', 'w') as outfile:
+		json.dump(first_round, outfile)
+		outfile.close()
+	with open('last_round.txt', 'w') as outfile:
+		json.dump(last_round, outfile)
+		outfile.close()
+
+	with open('random_better_round.txt', 'w') as outfile:
+		json.dump(random_better_round, outfile)
+		outfile.close()
+
 	print('last round:\n{}'.format(last_round))
 	print('random better round:\n{}'.format(random_better_round))
 	
@@ -77,7 +89,6 @@ def check_result(picks):
 
 def draw_bars():
 	last_draw = all_lucks[0]
-
 	x_last = []
 	y_last = []
 	x_most = []
@@ -103,6 +114,8 @@ def draw_bars():
 	plt.legend(loc='upper right')
 
 def show():
+
+	plt.switch_backend('Qt5Agg')
 	x = [ele[0] for ele in sorted_p]
 	y = [ele[1] for ele in sorted_p]
 	plt.xlim((0, 50))
@@ -115,9 +128,12 @@ def show():
 	
 	for m,n in zip(x,y):
 		plt.text(m, n+0.05, '%d' % n, ha='center', va= 'bottom')
+	
 
-	# plt.show()
-	plt.savefig('../wintoto/web/web-client/src/assets/img/overall.png',bbox_inches='tight')
+	figM = plt.get_current_fig_manager()
+	figM.window.showMaximized()
+	#plt.show()
+	plt.savefig('overall.png',bbox_inches='tight')
 
 
 if __name__ == '__main__':
