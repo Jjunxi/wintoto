@@ -1,3 +1,5 @@
-.txt
-config.py
 __pycache__/
+
+*.txt
+
+config.py

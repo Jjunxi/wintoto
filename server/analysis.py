@@ -133,8 +133,8 @@ def show():
 	figM = plt.get_current_fig_manager()
 	figM.window.showMaximized()
 	#plt.show()
-	plt.savefig('overall.png',bbox_inches='tight')
-
+	# plt.show()
+	plt.savefig('../web/web-client/src/assets/img/overall.png',bbox_inches='tight')
 
 if __name__ == '__main__':
 	get_all()
