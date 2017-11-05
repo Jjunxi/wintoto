@@ -2,10 +2,10 @@ import random as rm
 import operator
 import json
 import numpy as np
-
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 from matplotlib import pyplot as plt
+plt.ioff()
 
 PICK_NUMBER = 6
 ROUND_NUMBER = 314
@@ -115,7 +115,7 @@ def draw_bars():
 
 def show():
 
-	plt.switch_backend('Qt5Agg')
+	#plt.switch_backend('Qt5Agg')
 	x = [ele[0] for ele in sorted_p]
 	y = [ele[1] for ele in sorted_p]
 	plt.xlim((0, 50))
@@ -129,9 +129,13 @@ def show():
 	for m,n in zip(x,y):
 		plt.text(m, n+0.05, '%d' % n, ha='center', va= 'bottom')
 	
+	#manager = plt.get_current_fig_manager()
+	#manager.resize(*manager.window.maxsize())
 
-	figM = plt.get_current_fig_manager()
-	figM.window.showMaximized()
+	#mng = plt.get_current_fig_manager()
+	#mng.frame.Maximize(True)
+	#figM = plt.get_current_fig_manager()
+	#figM.window.showMaximized()
 	#plt.show()
 	# plt.show()
 	plt.savefig('../web/web-client/src/assets/img/overall.png',bbox_inches='tight')

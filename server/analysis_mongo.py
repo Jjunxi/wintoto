@@ -9,6 +9,7 @@ from bson.json_util import dumps, RELAXED_JSON_OPTIONS
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
+plt.ioff()
 
 all_lucks = []
 sorted_p = {}
@@ -134,6 +135,7 @@ def draw_bars():
 	plt.legend(loc='upper right')
 
 def show():
+	# plt.switch_backend('Qt5Agg')
 	x = [ele[0] for ele in sorted_p]
 	y = [ele[1] for ele in sorted_p]
 	plt.xlim((0, 50))
@@ -148,7 +150,11 @@ def show():
 		plt.text(m, n+0.05, '%d' % n, ha='center', va= 'bottom')
 
 	# plt.show()
-	plt.savefig('../web/web-client/src/assets/img/overall.png',bbox_inches='tight')
+	# figM = plt.get_current_fig_manager()
+	# figM.window.showMaximized()
+
+	plt.savefig(IMG_PATH, bbox_inches='tight')
+	# plt.savefig('../web/web-client/src/assets/img/overall.png',bbox_inches='tight')
 
 
 if __name__ == '__main__':
