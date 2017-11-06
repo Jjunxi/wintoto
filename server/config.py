@@ -1,6 +1,6 @@
 MONGO_URL = 'localhost'
 MONGO_DB = 'wintoto'
-MONGO_TABLE = 'toto'
+MONGO_TABLE = 'totos'
 
 NUMBER_THREAD = 50
 PICK_NUMBER = 6

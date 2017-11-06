@@ -1,16 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { Http, RequestOptions } from '@angular/http';
+
 import { AppComponent } from './app.component';
+import { TotoService } from "app/services/toto.service";
+
+
+import { RoutesModule } from "app/app.routes";
+
+import { HttpModule } from '@angular/http';
+import { TotosComponent } from './components/totos/totos.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TotosComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    RoutesModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'TotoService',
+      useClass: TotoService
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
