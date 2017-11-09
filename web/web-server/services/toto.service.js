@@ -11,7 +11,7 @@ var getTotos = function () {
             } else {
                 resolve(totos);
             }
-        });
+        }).sort({number:-1});
     });
 };
 
