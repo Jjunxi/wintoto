@@ -11,11 +11,13 @@ import { RoutesModule } from "app/app.routes";
 
 import { HttpModule } from '@angular/http';
 import { TotosComponent } from './components/totos/totos.component';
+import { HistoryDistributionComponent } from './components/history-distribution/history-distribution.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TotosComponent
+    TotosComponent,
+    HistoryDistributionComponent
   ],
   imports: [
     BrowserModule,

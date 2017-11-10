@@ -15,6 +15,8 @@ export class TotosComponent implements OnInit {
 
   ngOnInit() {
     this.getTotos();
+
+
   }
 
   getTotos(): void {
@@ -22,4 +24,6 @@ export class TotosComponent implements OnInit {
     this.subscriptionTotos = this.TotoService.getTotos()
       .subscribe(totos => this.totos = totos);
   }
+
+  
 }
