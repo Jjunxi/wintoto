@@ -5,7 +5,21 @@ import $ from 'jquery';
 import Chart from 'chart.js';
 
 const X = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49'];
-const Y = [59, 40, 48, 46, 43, 57, 34, 49, 39, 38, 54, 38, 39, 37, 33, 53, 50, 40, 49, 49, 30, 47, 52, 48, 40, 36, 52, 59, 36, 36, 58, 45, 56, 58, 37, 45, 60, 39, 58, 51, 50, 40, 45, 53, 50, 48, 46, 39, 31];
+var Y_overalall = [];
+var Y_additional = []; 
+var Y_six = []; 
+
+var statistic_overall = [];
+var statistic_additional = [];
+
+for(var i = 0; i < 50; i++)
+{
+  Y_overalall[i] = 0 ; 
+  statistic_additional[i] = 0; 
+  Y_six[i] = 0; 
+}
+
+
 const COLORS = {
   red: 'rgb(255, 99, 132)',
   orange: 'rgb(255, 159, 64)',
@@ -24,30 +38,91 @@ const COLORS = {
 
 export class HistoryDistributionComponent implements OnInit {
   totos: Toto[];
-
+  @Input() childMessage: string;
+  subscriptionTotos: Subscription;
   constructor( @Inject('TotoService') private TotoService) { }
 
   ngOnInit() {
-    // this.getTotos();
-    this.drawBarChart();
+    this.getTotos();
   }
 
-  // getTotos(): void {
-  //   // this.totos = this.TotoService.getTotos();
-  //   this.subscriptionTotos = this.TotoService.getTotos()
-  //     .subscribe(totos => this.totos = totos);
-  // }
+  getTotos(): void {
+     this.subscriptionTotos = this.TotoService.getTotos()
+       .subscribe(totos => 
+       {
+          this.totos = totos;
+          //console.log(this.totos);
+          console.log(this.totos.length);
+          this.totos.forEach( function (arrayItem)
+          {
+              //console.log(arrayItem);
+              var additional = arrayItem.additional; 
+              Y_overalall[additional - 1] ++;
+              statistic_additional[additional - 1] ++; 
+              var major = arrayItem.lucks; 
+              major.forEach( function (luck)
+              {
+                Y_overalall[luck - 1] ++;
+
+              }); 
+          }); 
+          this.drawBarChart();   
+          //this.drawBarChartAdditional();
+          //this.drawBarChartSixNumber();
+       }
+      );
+  }
 
   drawBarChart(): void {
     var color = Chart.helpers.color;
-    // console.log(color(COLORS.red).alpha(0.5).rgbString())
     var ctx = $('#myChart');
+    var frequency = [];
+
     var chart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: X,
         datasets: [{
-          data: Y,
+          data: Y_overalall,
+          backgroundColor: color(COLORS.red).alpha(0.5).rgbString(),
+        }],
+      },
+      
+      options: {}
+    });
+  }
+
+  drawBarChartAdditional(): void {
+    var color = Chart.helpers.color;
+    var ctx = $('#myChart');
+    var frequency = [];
+
+    var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: X,
+        datasets: [{
+          data: Y_additional,
+          backgroundColor: color(COLORS.red).alpha(0.5).rgbString(),
+        }],
+      },
+      
+      options: {}
+    });
+  }
+
+
+  drawBarChartSixNumber(): void {
+    var color = Chart.helpers.color;
+    var ctx = $('#myChart');
+    var frequency = [];
+
+    var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: X,
+        datasets: [{
+          data: Y_six,
           backgroundColor: color(COLORS.red).alpha(0.5).rgbString(),
         }],
       },

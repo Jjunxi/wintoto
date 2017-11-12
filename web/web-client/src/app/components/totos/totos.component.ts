@@ -15,8 +15,6 @@ export class TotosComponent implements OnInit {
 
   ngOnInit() {
     this.getTotos();
-
-
   }
 
   getTotos(): void {

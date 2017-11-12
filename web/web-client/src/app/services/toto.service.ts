@@ -24,6 +24,8 @@ export class TotoService {
       .catch((err: Response) => {
       });
     // return this.totos;
+    console.log("test123")
+    console.log(this.totoSource.asObservable())
     return this.totoSource.asObservable();
   }
 }
