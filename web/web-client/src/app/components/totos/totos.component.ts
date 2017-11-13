@@ -44,6 +44,7 @@ export class TotosComponent implements OnInit {
     this.TotoService.getTotos()
       .then(totos => {
         this.totos = this.totos.concat(totos);
+        console.log(this.totos);
       })
       .catch(err => console.log(err));
   }

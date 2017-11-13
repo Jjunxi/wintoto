@@ -15,7 +15,7 @@ var statistic_additional = [];
 for(var i = 0; i < 50; i++)
 {
   Y_overalall[i] = 0 ; 
-  statistic_additional[i] = 0; 
+  Y_additional[i] = 0; 
   Y_six[i] = 0; 
 }
 
@@ -37,16 +37,16 @@ const COLORS = {
 })
 
 export class HistoryDistributionComponent implements OnInit {
-  totos: Toto[];
-  @Input() childMessage: string;
+  totos: Toto[] = [];
   subscriptionTotos: Subscription;
   constructor( @Inject('TotoService') private TotoService) { }
 
   ngOnInit() {
+    console.log("test");
     this.getTotos();
   }
 
-  getTotos(): void {
+  //getTotos(): void {
     //  this.subscriptionTotos = this.TotoService.getTotos()
     //    .subscribe(totos => 
     //    {
@@ -71,11 +71,38 @@ export class HistoryDistributionComponent implements OnInit {
     //       //this.drawBarChartSixNumber();
     //    }
     //   );
+  //}
+
+  getTotos(): void {
+    this.TotoService.getTotos()
+      .then(totos => {
+        this.totos = this.totos.concat(totos);
+        console.log(this.totos);
+         this.totos.forEach( function (arrayItem)
+         {
+             //console.log(arrayItem);
+             var additional = arrayItem.additional; 
+             Y_overalall[additional - 1] ++;
+             Y_additional[additional - 1] ++; 
+             var major = arrayItem.lucks; 
+             major.forEach( function (luck)
+             {
+               Y_overalall[luck - 1] ++;
+               Y_six[luck - 1] ++;
+
+             }); 
+         }); 
+        this.drawBarChart();   
+        this.drawBarChartAdditional();
+        this.drawBarChartSixNumber();
+      })
+      .catch(err => console.log(err));
   }
 
   drawBarChart(): void {
     var color = Chart.helpers.color;
     var ctx = $('#myChart');
+    console.log(ctx);
     var frequency = [];
 
     var chart = new Chart(ctx, {
@@ -94,9 +121,9 @@ export class HistoryDistributionComponent implements OnInit {
 
   drawBarChartAdditional(): void {
     var color = Chart.helpers.color;
-    var ctx = $('#myChart');
+    var ctx = $('#myChartAdditional');
     var frequency = [];
-
+    console.log(ctx);
     var chart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -114,7 +141,7 @@ export class HistoryDistributionComponent implements OnInit {
 
   drawBarChartSixNumber(): void {
     var color = Chart.helpers.color;
-    var ctx = $('#myChart');
+    var ctx = $('#myChartSixNumber');
     var frequency = [];
 
     var chart = new Chart(ctx, {
