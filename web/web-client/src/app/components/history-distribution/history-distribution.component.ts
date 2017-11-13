@@ -47,30 +47,30 @@ export class HistoryDistributionComponent implements OnInit {
   }
 
   getTotos(): void {
-     this.subscriptionTotos = this.TotoService.getTotos()
-       .subscribe(totos => 
-       {
-          this.totos = totos;
-          //console.log(this.totos);
-          console.log(this.totos.length);
-          this.totos.forEach( function (arrayItem)
-          {
-              //console.log(arrayItem);
-              var additional = arrayItem.additional; 
-              Y_overalall[additional - 1] ++;
-              statistic_additional[additional - 1] ++; 
-              var major = arrayItem.lucks; 
-              major.forEach( function (luck)
-              {
-                Y_overalall[luck - 1] ++;
+    //  this.subscriptionTotos = this.TotoService.getTotos()
+    //    .subscribe(totos => 
+    //    {
+    //       this.totos = totos;
+    //       //console.log(this.totos);
+    //       console.log(this.totos.length);
+    //       this.totos.forEach( function (arrayItem)
+    //       {
+    //           //console.log(arrayItem);
+    //           var additional = arrayItem.additional; 
+    //           Y_overalall[additional - 1] ++;
+    //           statistic_additional[additional - 1] ++; 
+    //           var major = arrayItem.lucks; 
+    //           major.forEach( function (luck)
+    //           {
+    //             Y_overalall[luck - 1] ++;
 
-              }); 
-          }); 
-          this.drawBarChart();   
-          //this.drawBarChartAdditional();
-          //this.drawBarChartSixNumber();
-       }
-      );
+    //           }); 
+    //       }); 
+    //       this.drawBarChart();   
+    //       //this.drawBarChartAdditional();
+    //       //this.drawBarChartSixNumber();
+    //    }
+    //   );
   }
 
   drawBarChart(): void {
