@@ -89,19 +89,17 @@ export class HistoryDistributionComponent implements OnInit {
              {
                Y_overalall[luck - 1] ++;
                Y_six[luck - 1] ++;
-
              }); 
          }); 
-        this.drawBarChart();   
-        this.drawBarChartAdditional();
-        this.drawBarChartSixNumber();
+        this.drawBarChart($('#myChart'), Y_overalall);   
+        this.drawBarChart($('#myChartAdditional'), Y_additional);   
+        this.drawBarChart($('#myChartSixNumber'), Y_six);   
       })
       .catch(err => console.log(err));
   }
 
-  drawBarChart(): void {
+  drawBarChart(ctx, datalist): void {
     var color = Chart.helpers.color;
-    var ctx = $('#myChart');
     console.log(ctx);
     var frequency = [];
 
@@ -109,8 +107,9 @@ export class HistoryDistributionComponent implements OnInit {
       type: 'bar',
       data: {
         labels: X,
+        label: 'Number Count',
         datasets: [{
-          data: Y_overalall,
+          data: datalist,
           backgroundColor: color(COLORS.red).alpha(0.5).rgbString(),
         }],
       },
@@ -118,44 +117,4 @@ export class HistoryDistributionComponent implements OnInit {
       options: {}
     });
   }
-
-  drawBarChartAdditional(): void {
-    var color = Chart.helpers.color;
-    var ctx = $('#myChartAdditional');
-    var frequency = [];
-    console.log(ctx);
-    var chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: X,
-        datasets: [{
-          data: Y_additional,
-          backgroundColor: color(COLORS.red).alpha(0.5).rgbString(),
-        }],
-      },
-      
-      options: {}
-    });
-  }
-
-
-  drawBarChartSixNumber(): void {
-    var color = Chart.helpers.color;
-    var ctx = $('#myChartSixNumber');
-    var frequency = [];
-
-    var chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: X,
-        datasets: [{
-          data: Y_six,
-          backgroundColor: color(COLORS.red).alpha(0.5).rgbString(),
-        }],
-      },
-      
-      options: {}
-    });
-  }
-
 }
