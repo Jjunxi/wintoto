@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Win TOTO';
+  title = 'Win TOTO Singapore';
    parentMessage = "message from parent";
    ngOnInit() {
 

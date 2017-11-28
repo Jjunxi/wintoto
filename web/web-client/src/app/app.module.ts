@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { TotoService } from "app/services/toto.service";
 
 
-import { RoutesModule } from "app/app.routes";
+//import { RoutesModule } from "app/app.routes";
 
 import { HttpModule } from '@angular/http';
 import { TotosComponent } from './components/totos/totos.component';
 import { HistoryDistributionComponent } from './components/history-distribution/history-distribution.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HistoryDistributionComponent } from './components/history-distribution/
   imports: [
     BrowserModule,
     HttpModule,
-    RoutesModule
+    //RoutesModule,
+    AppRoutingModule
   ],
   providers: [
     {
