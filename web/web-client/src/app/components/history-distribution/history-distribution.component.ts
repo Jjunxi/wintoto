@@ -116,7 +116,7 @@ export class HistoryDistributionComponent implements OnInit {
         labels: X,
       
         datasets: [{
-          label: 'Winning Number Count',
+          label: 'No. Winning',
           data: datalist,
           backgroundColor: color(COLORS.red).alpha(0.5).rgbString(),
         }],
