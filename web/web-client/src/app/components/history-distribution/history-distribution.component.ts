@@ -27,10 +27,6 @@ function create_dict(X, value)
   return dict; 
 }
 
-
-
-
-
 var dict_seven;
 var dict_additional; 
 var dict_six; 
