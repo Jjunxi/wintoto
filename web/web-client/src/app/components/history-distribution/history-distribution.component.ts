@@ -124,22 +124,44 @@ export class HistoryDistributionComponent implements OnInit {
   }
 
   drawBarChart(ctx, datalist, colorlist): void {
-    console.log(ctx);
+    //console.log(ctx);
+    var color = Chart.helpers.color;
     var frequency = [];
 
     var chart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: X,
-      
         datasets: [{
-          label: 'No. Winning',
+          label: 'HOT Numbers',
           data: datalist,
           backgroundColor: colorlist,
-        }],
+        },
+        {
+           label: 'GENTLE Numbers',
+           //backgroundColor: color(COLORS.purple).alpha(0.5).rgbString(),
+           data:[]
+        },
+        {
+           label: 'COOL Numbers',
+           //backgroundColor: color(COLORS.grey).alpha(0.5).rgbString(),
+           data:[]
+        }
+        ],
       },
-      
-      options: {}
+      options: {
+        legend: {
+          labels: {
+            generateLabels: function(chart) {
+              var labels = Chart.defaults.global.legend.labels.generateLabels(chart);
+              labels[0].fillStyle = color(COLORS.purple).alpha(0.5).rgbString();
+              labels[1].fillStyle = color(COLORS.red).alpha(0.5).rgbString();
+              labels[2].fillStyle = color(COLORS.grey).alpha(0.5).rgbString();
+              return labels;
+            }
+          }
+        }
+      }
     });
   }
 }
