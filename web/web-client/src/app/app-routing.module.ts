@@ -6,7 +6,7 @@ import { HistoryDistributionComponent } from './components/history-distribution/
 import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/history', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'history', component: HistoryDistributionComponent},
   { path: 'totos', component: TotosComponent },
   { path: 'rule', component: AboutComponent },
