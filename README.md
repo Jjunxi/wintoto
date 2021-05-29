@@ -1,6 +1,6 @@
 # Wintoto
 
-[Wintoto](http://www.wintoto.sg/ "Wintoto") is a website for learning patterns of Singapore Toto.
+[Wintoto](http://www.win-toto.sg/ "Wintoto") is a website for learning patterns of Singapore Toto.
 
 Web Client:
 
