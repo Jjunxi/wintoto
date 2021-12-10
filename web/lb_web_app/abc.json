@@ -1,0 +1,644 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "lbwebapp",
+        "version": "0.0.1",
+        "description": "for win-toto-web",
+        "contact": {
+            "name": "jeff994",
+            "email": "hujianbo1981@gmail.com"
+        }
+    },
+    "paths": {
+        "/ping": {
+            "get": {
+                "x-controller-name": "PingController",
+                "x-operation-name": "ping",
+                "tags": [
+                    "PingController"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ping Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PingResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "PingController.ping"
+            }
+        },
+        "/totos/count": {
+            "get": {
+                "x-controller-name": "TotoController",
+                "x-operation-name": "count",
+                "tags": [
+                    "TotoController"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Toto model count",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/loopback.Count"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "title": "Toto.WhereFilter",
+                                    "additionalProperties": true,
+                                    "x-typescript-type": "@loopback/repository#Where<Toto>"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "operationId": "TotoController.count"
+            }
+        },
+        "/totos/{id}": {
+            "put": {
+                "x-controller-name": "TotoController",
+                "x-operation-name": "replaceById",
+                "tags": [
+                    "TotoController"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Toto PUT success"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Toto"
+                            }
+                        }
+                    },
+                    "x-parameter-index": 1
+                },
+                "operationId": "TotoController.replaceById"
+            },
+            "patch": {
+                "x-controller-name": "TotoController",
+                "x-operation-name": "updateById",
+                "tags": [
+                    "TotoController"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Toto PATCH success"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TotoPartial"
+                            }
+                        }
+                    },
+                    "x-parameter-index": 1
+                },
+                "operationId": "TotoController.updateById"
+            },
+            "get": {
+                "x-controller-name": "TotoController",
+                "x-operation-name": "findById",
+                "tags": [
+                    "TotoController"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Toto model instance",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TotoWithRelations"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Toto.Filter"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "operationId": "TotoController.findById"
+            },
+            "delete": {
+                "x-controller-name": "TotoController",
+                "x-operation-name": "deleteById",
+                "tags": [
+                    "TotoController"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Toto DELETE success"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "operationId": "TotoController.deleteById"
+            }
+        },
+        "/totos": {
+            "post": {
+                "x-controller-name": "TotoController",
+                "x-operation-name": "create",
+                "tags": [
+                    "TotoController"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Toto model instance",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Toto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewToto"
+                            }
+                        }
+                    }
+                },
+                "operationId": "TotoController.create"
+            },
+            "patch": {
+                "x-controller-name": "TotoController",
+                "x-operation-name": "updateAll",
+                "tags": [
+                    "TotoController"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Toto PATCH success count",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/loopback.Count"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "title": "Toto.WhereFilter",
+                                    "additionalProperties": true,
+                                    "x-typescript-type": "@loopback/repository#Where<Toto>"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TotoPartial"
+                            }
+                        }
+                    }
+                },
+                "operationId": "TotoController.updateAll"
+            },
+            "get": {
+                "x-controller-name": "TotoController",
+                "x-operation-name": "find",
+                "tags": [
+                    "TotoController"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of Toto model instances",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TotoWithRelations"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Toto.Filter1"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "operationId": "TotoController.find"
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Toto": {
+                "title": "Toto",
+                "type": "object",
+                "properties": {
+                    "number": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "lucks": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    },
+                    "additional": {
+                        "type": "number"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "NewToto": {
+                "title": "NewToto",
+                "type": "object",
+                "description": "(tsType: Omit<Toto, 'id'>, schemaOptions: { title: 'NewToto', exclude: [ 'id' ] })",
+                "properties": {
+                    "number": {
+                        "type": "number"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "lucks": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    },
+                    "additional": {
+                        "type": "number"
+                    }
+                },
+                "additionalProperties": false,
+                "x-typescript-type": "Omit<Toto, 'id'>"
+            },
+            "TotoWithRelations": {
+                "title": "TotoWithRelations",
+                "type": "object",
+                "description": "(tsType: TotoWithRelations, schemaOptions: { includeRelations: true })",
+                "properties": {
+                    "number": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "lucks": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    },
+                    "additional": {
+                        "type": "number"
+                    }
+                },
+                "additionalProperties": false,
+                "x-typescript-type": "TotoWithRelations"
+            },
+            "TotoPartial": {
+                "title": "TotoPartial",
+                "type": "object",
+                "description": "(tsType: Partial<Toto>, schemaOptions: { partial: true })",
+                "properties": {
+                    "number": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "lucks": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    },
+                    "additional": {
+                        "type": "number"
+                    }
+                },
+                "additionalProperties": false,
+                "x-typescript-type": "Partial<Toto>"
+            },
+            "PingResponse": {
+                "type": "object",
+                "title": "PingResponse",
+                "properties": {
+                    "greeting": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "headers": {
+                        "type": "object",
+                        "properties": {
+                            "Content-Type": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                }
+            },
+            "loopback.Count": {
+                "type": "object",
+                "title": "loopback.Count",
+                "x-typescript-type": "@loopback/repository#Count",
+                "properties": {
+                    "count": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Toto.Filter": {
+                "type": "object",
+                "title": "Toto.Filter",
+                "properties": {
+                    "offset": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 100
+                    },
+                    "skip": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "order": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    },
+                    "fields": {
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "number": {
+                                        "type": "boolean"
+                                    },
+                                    "id": {
+                                        "type": "boolean"
+                                    },
+                                    "date": {
+                                        "type": "boolean"
+                                    },
+                                    "lucks": {
+                                        "type": "boolean"
+                                    },
+                                    "additional": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "number",
+                                        "id",
+                                        "date",
+                                        "lucks",
+                                        "additional"
+                                    ],
+                                    "example": "number"
+                                },
+                                "uniqueItems": true
+                            }
+                        ],
+                        "title": "Toto.Fields"
+                    }
+                },
+                "additionalProperties": false,
+                "x-typescript-type": "@loopback/repository#Filter<Toto>"
+            },
+            "Toto.Filter1": {
+                "type": "object",
+                "title": "Toto.Filter",
+                "properties": {
+                    "offset": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 100
+                    },
+                    "skip": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "order": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    },
+                    "where": {
+                        "title": "Toto.WhereFilter",
+                        "type": "object",
+                        "additionalProperties": true
+                    },
+                    "fields": {
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "number": {
+                                        "type": "boolean"
+                                    },
+                                    "id": {
+                                        "type": "boolean"
+                                    },
+                                    "date": {
+                                        "type": "boolean"
+                                    },
+                                    "lucks": {
+                                        "type": "boolean"
+                                    },
+                                    "additional": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "number",
+                                        "id",
+                                        "date",
+                                        "lucks",
+                                        "additional"
+                                    ],
+                                    "example": "number"
+                                },
+                                "uniqueItems": true
+                            }
+                        ],
+                        "title": "Toto.Fields"
+                    }
+                },
+                "additionalProperties": false,
+                "x-typescript-type": "@loopback/repository#Filter<Toto>"
+            }
+        }
+    }
+}
